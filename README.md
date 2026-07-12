@@ -29,21 +29,18 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 * **Medallion Architecture (Bronze, Silver, Gold layers)**
 
 ## OLTP database / Source table:
-<img width="1176" height="1086" alt="1783642481271" src="https://github.com/user-attachments/assets/b38e596c-f483-41df-850c-f6fe0e868307" />
-
-
-
 
 
 
 ### Data Pipeline Architecture :
-![_storage_emulated_0_Documents_pixelLab_20250925_173632](https://github.com/user-attachments/assets/b5aa0d0b-c597-4fc8-8e4e-c43d45ac15ed)
+
 
 The pipeline follows the Medallion Architecture approach with Bronze, Silver, and Gold layers. The Bronze layer stores raw incoming sales data, the Silver layer performs data cleaning, validation, and enrichment, and the Gold layer contains aggregated sales data used for revenue tracking, sales performance analysis, inventory monitoring, and reporting. The pipeline is implemented using the Databricks Lakehouse Platform, which supports both batch and real-time data processing.
   
 ## Features & Implementation Details:
 
-<img width="1919" height="988" alt="Screenshot 2025-09-25 123438" src="https://github.com/user-attachments/assets/a13dd722-2874-4b60-baf0-61d63474133b" />
+<img width="1797" height="745" alt="Screenshot 2026-07-12 160327" src="https://github.com/user-attachments/assets/c7d401e8-a6ed-413e-9b06-ecd580267962" />
+
 
 ### Incremental Data Ingestion:
 * Generated streaming data using a loop for sales (Bhubaneswar and Khordha), customer, and product records to act as streaming sources.
