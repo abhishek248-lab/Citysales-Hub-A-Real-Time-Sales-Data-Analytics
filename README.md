@@ -43,26 +43,98 @@ The pipeline follows the Medallion Architecture approach with Bronze, Silver, an
 <img width="1780" height="666" alt="Screenshot 2026-07-12 161230" src="https://github.com/user-attachments/assets/1a40d61c-4bac-4794-a71a-a11bf8adb798" />
 
 
-### Incremental Data Ingestion:
-* Generated streaming data using a loop for sales (Bhubaneswar and Khordha), customer, and product records to act as streaming sources.
-* Created Delta tables with schema and initial data during the first run, then processed only new incoming records in the following runs.
-* Improved data loading by processing only new records and avoiding duplicates.
+## 📌 Synthetic Data Generator
 
-### Bronze Layer (Data Staging) :
-* Ingests streaming sales data from Bhubaneswar and Khordha regions into the append_sales streaming table, along with customer and product data from streaming sources.
-* Uses Lakeflow expectations to apply data quality checks such as null validation and basic data cleansing.
-* Stores raw data reliably in the Bronze layer for further processing in the Silver layer.
+- Developed a **synthetic streaming data generator** to simulate real-time business transactions for **Customers, Products, and Sales** across multiple regions (**Bhubaneswar** and **Khordha**).
+- Created **Delta source tables** with the initial schema during the first execution and continuously generated **incremental records** in subsequent runs.
+- Simulated independent streaming sources to validate **real-time ingestion**, **schema evolution**, and **incremental processing**.
+- Enabled **`mergeSchema`** to automatically accommodate new columns without modifying the pipeline.
+- Implemented a **multi-source append pattern**, allowing new regional sales streams to be added easily while preventing duplicate processing and ensuring fault isolation.
 
-### Silver Layer (Cleaned & Enriched Data)
+---
 
-* Applies advanced transformations such as column standardization and filtering based on business rules.
-* Implements Slowly Changing Dimensions (SCD) Type 1 and Type 2 using Auto CDC for customer and product dimension history tracking.
+# 🥉 Bronze Layer (Raw Data Ingestion)
 
-### Gold Layer (Aggregated Analytics)
+### Purpose
+The Bronze layer ingests raw streaming data while ensuring data quality and schema consistency.
 
-* Generates unique regional sales IDs using ROW_NUMBER() for tracking sales records.
-* Joins fact and dimension tables to create enriched sales datasets with customer, product, and region details.
-* Builds real-time aggregate views for business reporting, such as revenue tracking, regional sales performance, product-wise sales trends, and inventory analysis.
+### Features
+
+- Ingests streaming **Customer**, **Product**, and **Sales** data into Bronze Streaming Tables:
+  - `customers`
+  - `products`
+  - `append_sales`
+- Combines multiple city-wise sales streams using **Append Flows** to create a unified streaming sales dataset.
+- Implements **Lakeflow Expectations** to enforce data quality rules:
+  - NOT NULL validation
+  - `amount > 0`
+  - `quantity > 0`
+- Supports **Schema Evolution** using **`mergeSchema`**, allowing upstream schema changes without manual intervention.
+- Enables **Change Data Feed (CDC)** for downstream change tracking.
+- Uses **Column Mapping** to support schema modifications such as column renames.
+- Configures **120-day Delta retention** for governance, auditing, and Delta Time Travel.
+- Stores validated raw data as the foundation for downstream transformations.
+
+---
+
+# 🥈 Silver Layer (Transformation & Enrichment)
+
+## Transformation Layer
+
+### Purpose
+Transforms and standardizes raw data before dimensional modeling.
+
+### Features
+
+- Uses **Temporary Views** for lightweight preprocessing without persisting intermediate datasets.
+- Standardizes business attributes:
+  - Converts **Region** to uppercase.
+  - Converts **Category** to uppercase.
+- Filters records using business rules:
+  - `quantity >= 2`
+- Keeps transformations pipeline-private while minimizing storage overhead.
+
+---
+
+## Dimension & Fact Layer
+
+### Features
+
+- Implements **Auto CDC** using **SCD Type 1** to maintain the latest version of **Customer** and **Product** dimensions.
+- Creates **Append-Only Fact Tables** to store immutable sales transactions.
+- Performs an efficient **Stream-Batch Join** between streaming fact tables and batch dimension tables to generate an enriched sales dataset.
+- Enriches transactional data with:
+  - Customer information
+  - Product information
+  - Regional information
+- Applies **Liquid Clustering** on:
+  - `customer_id`
+  - `product_id`
+- Enables **Auto Optimize** for automatic file compaction and storage optimization.
+- Supports **Schema Evolution** throughout the enrichment process, automatically propagating newly added columns.
+
+---
+
+# 🥇 Gold Layer (Business Analytics)
+
+### Purpose
+Generates real-time business KPIs for reporting and analytics.
+
+### Features
+
+- Builds a real-time analytics layer using **1-minute Tumbling Windows**.
+- Configures a **1-minute Watermark** to handle late-arriving streaming events.
+- Generates **21+ real-time Business KPIs** across multiple analytical domains.
+- Computes:
+  - 💰 Revenue Metrics
+  - 👥 Customer Metrics
+  - 📦 Product Metrics
+  - 📈 Sales Volume Metrics
+  - 🌍 Regional Metrics
+  - ⏱️ Time-Based Metrics
+- Produces optimized analytical datasets for business reporting and decision-making.
+- Delivers low-latency metrics suitable for enterprise-scale real-time analytics.
+
 
 ### Output:
 <img width="1770" height="711" alt="Screenshot 2026-07-12 160420" src="https://github.com/user-attachments/assets/c78e829d-27fb-4627-b81a-9b7dc6eb0788" />
