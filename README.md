@@ -61,9 +61,6 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 - **Business Intelligence (BI)**
 - **Real-Time Analytics**
 
-## OLTP database / Source table:
-
-
 
 ### Data Pipeline Architecture :
 <img width="1693" height="929" alt="ChatGPT Image Jul 12, 2026, 05_37_30 PM" src="https://github.com/user-attachments/assets/c02ce027-129b-492b-aa6a-ab538afdddc9" />
