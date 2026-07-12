@@ -33,6 +33,7 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 
 
 ### Data Pipeline Architecture :
+<img width="1693" height="929" alt="ChatGPT Image Jul 12, 2026, 05_37_30 PM" src="https://github.com/user-attachments/assets/c02ce027-129b-492b-aa6a-ab538afdddc9" />
 
 
 The pipeline follows the Medallion Architecture approach with Bronze, Silver, and Gold layers. The Bronze layer stores raw incoming sales data, the Silver layer performs data cleaning, validation, and enrichment, and the Gold layer contains aggregated sales data used for revenue tracking, sales performance analysis, inventory monitoring, and reporting. The pipeline is implemented using the Databricks Lakehouse Platform, which supports both batch and real-time data processing.
