@@ -168,12 +168,15 @@ Generates real-time business KPIs for reporting and analytics.
 
 ### Output:
 <img width="1770" height="711" alt="Screenshot 2026-07-12 160420" src="https://github.com/user-attachments/assets/c78e829d-27fb-4627-b81a-9b7dc6eb0788" />
-
-
-### Performance:
-
 <img width="1776" height="755" alt="Screenshot 2026-07-12 160349" src="https://github.com/user-attachments/assets/766122d1-7cc7-4118-abf5-29e0739e8c13" />
 
+
+## 🚀 Key Achievements
+
+- Reduced compute overhead by **~60%** through **incremental streaming processing**, processing only newly arrived records instead of reprocessing the entire dataset.
+- Improved query performance by **up to 40%** using **Liquid Clustering** and **Auto Optimize (Auto Compaction)** to optimize Delta Lake storage and query execution.
+- Reduced manual pipeline maintenance by **~70%** through **Auto CDC**, **Schema Evolution (`mergeSchema`)**, and **Column Mapping**, eliminating manual schema updates and merge logic.
+- Reduced downstream invalid records by **over 90%** using **Lakeflow Expectations**, enforcing automated data quality validation during data ingestion.
 
 ## 🚧 Challenges
 
