@@ -67,11 +67,13 @@ The pipeline follows the Medallion Architecture approach with Bronze, Silver, an
 * Builds real-time aggregate views for business reporting, such as revenue tracking, regional sales performance, product-wise sales trends, and inventory analysis.
 
 ### Output:
-<img width="1915" height="546" alt="Screenshot 2025-09-25 123652" src="https://github.com/user-attachments/assets/e351caff-fa77-49da-81a0-011ae7412741" />
+<img width="1770" height="711" alt="Screenshot 2026-07-12 160420" src="https://github.com/user-attachments/assets/c78e829d-27fb-4627-b81a-9b7dc6eb0788" />
+
 
 ### Performance:
 
-<img width="1916" height="936" alt="Screenshot 2025-09-25 123622" src="https://github.com/user-attachments/assets/b865babf-68e2-4c2c-9ddd-e2953eb6ac5b" />
+<img width="1776" height="755" alt="Screenshot 2026-07-12 160349" src="https://github.com/user-attachments/assets/766122d1-7cc7-4118-abf5-29e0739e8c13" />
+
 
 ## Challenges :
 * Generating and handling continuous streaming data to mimic real-time sales events from sales, customer, and product sources.
