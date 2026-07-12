@@ -39,7 +39,7 @@ The pipeline follows the Medallion Architecture approach with Bronze, Silver, an
   
 ## Features & Implementation Details:
 
-<img width="1797" height="745" alt="Screenshot 2026-07-12 160327" src="https://github.com/user-attachments/assets/c7d401e8-a6ed-413e-9b06-ecd580267962" />
+<img width="1780" height="666" alt="Screenshot 2026-07-12 161230" src="https://github.com/user-attachments/assets/1a40d61c-4bac-4794-a71a-a11bf8adb798" />
 
 
 ### Incremental Data Ingestion:
