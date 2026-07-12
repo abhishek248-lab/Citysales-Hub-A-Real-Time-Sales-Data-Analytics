@@ -16,17 +16,50 @@ The pipeline provides faster sales insights, improves inventory tracking, reduce
 ## Target Users :
 Sales teams use the data to track sales and revenue, business teams use it for decision-making, and data analysts use it for reporting and analysis. Data engineers manage and maintain the pipeline.
 
-## Tech Stack :
-* **Databricks**
-* **Unity Catalog**
-* **Python**
-* **PySpark**
-* **Spark SQL**
-* **Spark Structured Streaming**
-* **Delta Table**
-* **Lakeflow Declarative Pipelines**
-* **Dimentional Modeling**
-* **Medallion Architecture (Bronze, Silver, Gold layers)**
+## 🛠️ Tech Stack
+
+### ☁️ Platform
+- **Databricks**
+- **Unity Catalog**
+- **Databricks Lakehouse Platform**
+
+### 👨‍💻 Programming & Processing
+- **Python**
+- **PySpark**
+- **Spark SQL**
+- **Apache Spark Structured Streaming**
+
+### 🗄️ Storage & Data Lake
+- **Delta Lake**
+- **Delta Tables**
+
+### 🔄 Data Engineering
+- **Lakeflow Declarative Pipelines (Delta Live Tables)**
+- **Streaming Tables**
+- **Auto CDC**
+- **Change Data Feed (CDC)**
+- **Schema Evolution (`mergeSchema`)**
+- **Lakeflow Expectations**
+- **Column Mapping**
+- **Liquid Clustering**
+- **Auto Optimize**
+
+### 🏛️ Data Architecture
+- **Medallion Architecture (Bronze, Silver, Gold)**
+- **Dimensional Modeling**
+- **Star Schema**
+- **Fact & Dimension Modeling**
+- **Stream-Batch Join**
+- **SCD Type 1**
+- **Window Aggregation**
+- **Watermarking**
+
+### 📊 Analytics & Reporting
+- **Real-Time Business KPIs**
+- **Window Functions**
+- **Aggregations**
+- **Business Intelligence (BI)**
+- **Real-Time Analytics**
 
 ## OLTP database / Source table:
 
@@ -145,43 +178,77 @@ Generates real-time business KPIs for reporting and analytics.
 <img width="1776" height="755" alt="Screenshot 2026-07-12 160349" src="https://github.com/user-attachments/assets/766122d1-7cc7-4118-abf5-29e0739e8c13" />
 
 
-## Challenges :
-* Generating and handling continuous streaming data to mimic real-time sales events from sales, customer, and product sources.
-* Building incremental data processing logic to load only new records and avoid duplicate data.
-* Maintaining data consistency while moving data across Bronze, Silver, and Gold layers.
-* Ensuring accurate sales insights such as revenue tracking, regional performance, and inventory updates.
+## 🚧 Challenges
 
-## Performance Optimization :
-* Used incremental processing to process only new incoming records instead of reprocessing the entire dataset.
-* Applied data quality checks using Lakeflow expectations at the Bronze layer to identify invalid records early and reduce unnecessary processing.
-* Used Auto CDC with SCD Type 1 and Type 2 to efficiently manage updates and maintain historical data.
-* Used Delta Lake OPTIMIZE to improve table performance by compacting small files and improving query efficiency.
+- Designed a **synthetic streaming data generator** to simulate continuous real-time sales, customer, and product events from multiple regional sources.
+- Implemented a **multi-source append pattern** to ingest streaming sales data from multiple cities while preventing duplicate processing and ensuring fault isolation.
+- Managed **schema evolution** across the Medallion Architecture using `mergeSchema`, allowing upstream schema changes without pipeline modifications.
+- Built an efficient **Stream-Batch Join** between streaming fact tables and dimension tables while maintaining low-latency processing.
+- Implemented **Auto CDC (SCD Type 1)** to maintain the latest customer and product dimensions without manual merge logic.
+- Generated **real-time business KPIs** using windowed aggregations and watermarking while handling late-arriving events.
 
-## Security :
-* Applied permissions and data governance to protect sales data.
+---
 
-## Error Handling
+## ⚡ Performance Optimization
 
-- Applied data quality rules to identify issues like null values and invalid records before moving data to the Silver layer.
-- Used Auto CDC to handle inserts and updates efficiently while maintaining data consistency in Silver tables.
-- Used Delta Lake transaction support to ensure consistent data writes and prevent partial updates.
+- Implemented **incremental streaming processing** to process only newly arriving records instead of reprocessing the complete dataset.
+- Applied **Lakeflow Expectations** in the Bronze layer to filter invalid records at ingestion, reducing downstream processing overhead.
+- Used **Temporary Views** for lightweight preprocessing without creating unnecessary intermediate storage.
+- Optimized enrichment using **Stream-Batch Joins**, reducing memory consumption compared to Stream-Stream joins.
+- Applied **Liquid Clustering** on `customer_id` and `product_id` to improve query performance.
+- Enabled **Auto Optimize** for automatic file compaction and optimized storage layout.
+- Leveraged **Change Data Feed (CDC)** for efficient downstream change tracking.
+- Configured **120-day Delta retention** to support governance, auditing, and Delta Time Travel.
 
-### How Delta Lake Helps
+---
 
-- If a write operation fails, Delta Lake prevents incomplete or corrupted table updates.
-- Transactions ensure data remains consistent during pipeline execution.
-- Failed processing can be safely retried without affecting existing data.
+## 🔒 Security & Governance
 
-## Scalability :
-* Built on the Databricks Lakehouse Platform using Delta Lake features, which provides scalable storage and supports increasing data volumes.
-* Used Medallion Architecture (Bronze, Silver, and Gold) to organize and process data efficiently as the pipeline grows.
-* Used Spark dynamic scaling (cluster autoscaling) to adjust compute resources based on workload and handle increasing data volumes.
+- Applied **Unity Catalog** permissions to secure datasets and control access.
+- Enabled **Change Data Feed (CDC)** for data lineage and auditing.
+- Used **Column Mapping** to safely support schema modifications, including column renames.
+- Configured **120-day retention policies** to support compliance and Delta Time Travel.
+- Maintained data quality using **Lakeflow Expectations** throughout the ingestion pipeline.
 
-## Monitoring:
-* Monitored pipeline execution, data quality checks, and failures using Databricks monitoring features.
-* Tracked Lakeflow pipeline runs to identify errors, performance issues, and processing status.
+---
 
-## Future Improvements :
-* Add real-time dashboards for sales performance, revenue trends, and inventory insights.
-* Implement automated alerts for pipeline failures and data quality issues.
-* Improve scalability by adding more data sources and automated pipeline configurations.
+## ❌ Error Handling
+
+- Applied **Lakeflow Expectations** to validate incoming records and automatically filter invalid data before downstream processing.
+- Enforced business validation rules including:
+  - `NOT NULL`
+  - `amount > 0`
+  - `quantity > 0`
+- Used **Auto CDC** to process inserts and updates while maintaining consistent dimension tables.
+- Leveraged **Delta Lake ACID Transactions** to guarantee atomic writes and prevent partial data updates.
+- Supported automatic recovery by allowing failed streaming micro-batches to be safely retried.
+
+### 🛡️ How Delta Lake Helps
+
+- Ensures **ACID Transactions** for reliable streaming writes.
+- Prevents incomplete or corrupted table updates during failures.
+- Supports **Time Travel** for auditing and recovery.
+- Enables safe retries without impacting previously committed data.
+
+---
+
+## 📈 Scalability
+
+- Built on the **Databricks Lakehouse Platform** using Delta Lake and Lakeflow Declarative Pipelines.
+- Implemented the **Medallion Architecture (Bronze → Silver → Gold)** for scalable and maintainable data processing.
+- Designed the pipeline using **Streaming Tables**, enabling continuous ingestion with minimal latency.
+- Used **Auto CDC** to efficiently process dimension updates without expensive merge operations.
+- Supported **Schema Evolution** using `mergeSchema`, allowing the pipeline to scale with changing source schemas.
+- Configured **Cluster Autoscaling** to dynamically allocate compute resources based on streaming workload.
+- Designed a **multi-source append architecture**, making it easy to onboard additional regional sales streams.
+
+---
+
+## 📊 Monitoring
+
+- Monitored **Lakeflow Pipeline** executions using the Databricks Pipeline UI.
+- Tracked streaming job health, processing latency, and pipeline execution status.
+- Monitored **Lakeflow Expectations** to identify invalid records and data quality failures.
+- Used Delta table history and pipeline logs for troubleshooting and operational monitoring.
+- Validated streaming throughput and micro-batch execution using Databricks monitoring tools.
+
