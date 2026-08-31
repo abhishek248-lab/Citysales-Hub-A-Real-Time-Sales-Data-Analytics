@@ -12,7 +12,8 @@ Because of this delay, it becomes difficult for business teams to identify the l
 The business needed faster access to sales information to make quick decisions related to revenue tracking, inventory management, and sales planning. Since the data was not available in real time, teams had to depend on delayed reports, which affected decision-making and operational efficiency.
 
 ## Solution :
-To solve this problem, I built a real-time sales data pipeline using Databricks Lakeflow Declarative Pipeline and Apache Spark Structured Streaming. The pipeline continuously ingests sales data, applies validations and transformations, and stores the processed data in the Lakehouse, allowing business teams to track sales and inventory updates quickly.
+To solve this problem, I designed a data pipeline using the Databricks Lakehouse Platform and followed the Medallion Architecture, which consists of Bronze, Silver, and Gold layers. In the Bronze layer, I ingest the raw sales data and apply data quality validations using expectations. In the Silver layer, I clean and transform the data using SQL and Spark transformations. In the Gold layer, I perform business-level analysis using Spark SQL and prepare the data for reporting and analytics.
+
 
 ## Business Value :
 The pipeline provides faster sales insights, improves inventory tracking, reduces manual work, and helps business teams make quicker decisions.
