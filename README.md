@@ -2,7 +2,11 @@
 CITYSALES HUB is a  real-time sales data pipeline built for a regional sales involving Bhubaneswar and Khordha regions of Madhav Ecommerce. It is built on the Databricks Lakehouse Platform using modern data engineering technologies such as Lakeflow Spark Declarative Pipelines, Spark Structured Streaming, Delta Lake, and Unity Catalog. The pipeline ingests, validates, transforms, and processes sales data in real time, enabling real-time sales dashboards, regional performance tracking, inventory monitoring, and faster business reporting .It is designed to be scalable, easy to maintain and business rules to be added with minimal code changes.
 
 ## Problem Statement :
-Traditional sales data processing relied on batch-based pipelines, where data was collected, processed, and stored in a data warehouse at scheduled intervals. It was difficult for business teams to track the latest sales data, inventory updates, and overall sales performance because the data was not available in real time. Managing separate pipelines for different requirements also increased development time and maintenance effort.
+
+Traditional sales data processing happens through batch pipelines, where data is collected from different sources and processed in batches before being stored in a data warehouse. This makes the overall data processing a long process, as data is available in the data warehouse only after the batch processing is completed.
+
+Because of this delay, it becomes difficult for business teams to identify the latest business performance, sales trends, and inventory updates in real time. Another challenge is that different business requirements require managing separate pipelines, which increases development time, development cost, and maintenance effort.
+
 
 ## Business Problem :
 The business needed faster access to sales information to make quick decisions related to revenue tracking, inventory management, and sales planning. Since the data was not available in real time, teams had to depend on delayed reports, which affected decision-making and operational efficiency.
