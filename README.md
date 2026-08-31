@@ -24,14 +24,11 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 ## 🛠️ Tech Stack
 
 ### ☁️ Platform
-- **Databricks**
-- **Unity Catalog**
 - **Databricks Lakehouse Platform**
 
 ### 👨‍💻 Programming & Processing
 - **Python**
 - **PySpark**
-- **Spark SQL**
 - **Apache Spark Structured Streaming**
 
 ### 🗄️ Storage & Data Lake
@@ -46,26 +43,14 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 - **Schema Evolution (`mergeSchema`)**
 - **Lakeflow Expectations**
 - **Column Mapping**
-- **Liquid Clustering**
 - **Auto Optimize**
 
 ### 🏛️ Data Architecture
 - **Medallion Architecture (Bronze, Silver, Gold)**
 - **Dimensional Modeling**
-- **Star Schema**
-- **Fact & Dimension Modeling**
-- **Stream-Batch Join**
 - **SCD Type 1**
 - **Window Aggregation**
 - **Watermarking**
-
-### 📊 Analytics & Reporting
-- **Real-Time Business KPIs**
-- **Window Functions**
-- **Aggregations**
-- **Business Intelligence (BI)**
-- **Real-Time Analytics**
-
 
 ### Data Pipeline Architecture :
 <img width="1536" height="1024" alt="ChatGPT Image Aug 31, 2026, 01_18_52 PM" src="https://github.com/user-attachments/assets/507763f0-5a2b-4208-8158-8611ba7df6b4" />
