@@ -168,14 +168,13 @@ Generates real-time business KPIs for reporting and analytics.
 - Reduced manual pipeline maintenance by **~70%** through **Auto CDC**, **Schema Evolution (`mergeSchema`)**, and **Column Mapping**, eliminating manual schema updates and merge logic.
 - Reduced downstream invalid records by **over 90%** using **Lakeflow Expectations**, enforcing automated data quality validation during data ingestion.
 
-## 🚧 Challenges
-
-- Designed a **synthetic streaming data generator** to simulate continuous real-time sales, customer, and product events from multiple regional sources.
-- Implemented a **multi-source append pattern** to ingest streaming sales data from multiple cities while preventing duplicate processing and ensuring fault isolation.
-- Managed **schema evolution** across the Medallion Architecture using `mergeSchema`, allowing upstream schema changes without pipeline modifications.
-- Built an efficient **Stream-Batch Join** between streaming fact tables and dimension tables while maintaining low-latency processing.
-- Implemented **Auto CDC (SCD Type 1)** to maintain the latest customer and product dimensions without manual merge logic.
-- Generated **real-time business KPIs** using windowed aggregations and watermarking while handling late-arriving events.
+## 🚧 Challenges And Solved
+- My CDC source contained technical metadata columns such as _commit_version, _commit_timestamp, and _change_type.
+These columns were added because they are required by AUTO CDC to identify the type of change and process CDC records in the correct sequence
+using sequence_by, which is important for implementing SCD Type 1 and SCD Type 2. However, I did not want these technical columns to remain in
+my final Silver table because they are not business-related data.
+- I resolved this by using the except_column_list option in create_auto_cdc_flow(). This allowed AUTO CDC to use the technical metadata columns
+during CDC and SCD processing, while excluding them from the final Silver table, resulting in a clean table containing only business-relevant columns.
 
 ---
 
