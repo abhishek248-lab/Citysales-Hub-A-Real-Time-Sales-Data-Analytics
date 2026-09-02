@@ -198,7 +198,5 @@ while True:
     display(df_khordha)
     df_khordha.coalesce(1).write.mode("append").option("header", "true").csv(f"{khordha_volume}")
 
-    
-    
 
     time.sleep(60)
