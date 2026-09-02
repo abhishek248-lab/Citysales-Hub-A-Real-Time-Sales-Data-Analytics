@@ -138,8 +138,9 @@ Generates real-time business KPIs for reporting and analytics.
 
 
 ### Output:
-<img width="1770" height="711" alt="Screenshot 2026-07-12 160420" src="https://github.com/user-attachments/assets/c78e829d-27fb-4627-b81a-9b7dc6eb0788" />
-<img width="1776" height="755" alt="Screenshot 2026-07-12 160349" src="https://github.com/user-attachments/assets/766122d1-7cc7-4118-abf5-29e0739e8c13" />
+<img width="1787" height="767" alt="Screenshot 2026-09-02 171324" src="https://github.com/user-attachments/assets/611a147a-aeb1-4263-b6b1-05403eb1a2be" />
+<img width="1793" height="812" alt="Screenshot 2026-09-02 171247" src="https://github.com/user-attachments/assets/d62f2da0-81c9-483d-8de0-28e189bdfa0f" />
+
 
 
 ## 🚧 Challenges And Solved
