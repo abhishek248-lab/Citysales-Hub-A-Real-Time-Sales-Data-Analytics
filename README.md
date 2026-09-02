@@ -152,20 +152,17 @@ Generates real-time business KPIs for reporting and analytics.
 <img width="1776" height="755" alt="Screenshot 2026-07-12 160349" src="https://github.com/user-attachments/assets/766122d1-7cc7-4118-abf5-29e0739e8c13" />
 
 
-## 🚀 Key Achievements
-
-- Reduced compute overhead by **~60%** through **incremental streaming processing**, processing only newly arrived records instead of reprocessing the entire dataset.
-- Improved query performance by **up to 40%** using **Liquid Clustering** and **Auto Optimize (Auto Compaction)** to optimize Delta Lake storage and query execution.
-- Reduced manual pipeline maintenance by **~70%** through **Auto CDC**, **Schema Evolution (`mergeSchema`)**, and **Column Mapping**, eliminating manual schema updates and merge logic.
-- Reduced downstream invalid records by **over 90%** using **Lakeflow Expectations**, enforcing automated data quality validation during data ingestion.
-
 ## 🚧 Challenges And Solved
+
+### Ist chnllange
 - My CDC source contained technical metadata columns such as _commit_version, _commit_timestamp, and _change_type.
 These columns were added because they are required by AUTO CDC to identify the type of change and process CDC records in the correct sequence
 using sequence_by, which is important for implementing SCD Type 1 and SCD Type 2. However, I did not want these technical columns to remain in
 my final Silver table because they are not business-related data.
 - I resolved this by using the except_column_list option in create_auto_cdc_flow(). This allowed AUTO CDC to use the technical metadata columns
 during CDC and SCD processing, while excluding them from the final Silver table, resulting in a clean table containing only business-relevant columns.
+
+
 
 ---
 
