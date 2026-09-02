@@ -41,11 +41,16 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 
 ## 📌 Synthetic Data Generator
 
-- Developed a **synthetic streaming data generator** to simulate real-time business transactions for **Customers, Products, and Sales** across multiple regions (**Bhubaneswar** and **Khordha**).
-- Created **Delta source tables** with the initial schema during the first execution and continuously generated **incremental records** in subsequent runs.
-- Simulated independent streaming sources to validate **real-time ingestion**, **schema evolution**, and **incremental processing**.
-- Enabled **`mergeSchema`** to automatically accommodate new columns without modifying the pipeline.
-- Implemented a **multi-source append pattern**, allowing new regional sales streams to be added easily while preventing duplicate processing and ensuring fault isolation.
+📌 **Synthetic Data Generator**
+
+- Developed a **continuous synthetic streaming data generator** to simulate real-time business transactions for **Customers, Products, and Sales** across multiple regions (**Bhubaneswar** and **Khordha**).
+- Defined **explicit PySpark schemas** for Customers, Products, and Orders to ensure consistent structure across continuously generated source data.
+- Generated **incremental batches of 5–20 records every 60 seconds** and wrote them as CSV files to **Unity Catalog Volumes**, simulating live streaming source feeds for Bronze-layer Auto Loader ingestion.
+- Implemented **multi-source regional sales feeds** with separate order ID ranges for Bhubaneswar and Khordha, supporting independent ingestion and append flows.
+- Deliberately introduced **data-quality issues**, including null values and negative prices, to validate downstream **Lakeflow Expectations** and Bronze-layer data-quality rules.
+- Generated **multiple date formats** (`yyyy-MM-dd`, `yyyy/MM/dd`, `dd/MM/yyyy`) to validate robust date parsing and transformation logic in the Silver layer.
+- Designed the generator to produce **continuous incremental data**, enabling validation of **Auto Loader ingestion, streaming transformations, schema handling, and incremental processing**.
+- Used existing Customer and Product IDs to generate realistic Order relationships and simulate **cross-source transactional data**.
 
 ---
 
