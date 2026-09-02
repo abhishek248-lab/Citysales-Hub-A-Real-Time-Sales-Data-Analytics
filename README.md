@@ -12,36 +12,25 @@ Because of this delay, it becomes difficult for business teams to identify the l
 To solve this problem, I designed a data pipeline using the Databricks Lakehouse Platform and followed the Medallion Architecture, which consists of Bronze, Silver, and Gold layers. In the Bronze layer, I ingest the raw sales data and apply data quality validations using expectations. In the Silver layer, I clean and transform the data using SQL and Spark transformations. In the Gold layer, I perform business-level analysis using Spark SQL and prepare the data for reporting and analytics.
 
 
-## 🛠️ Tech Stack
-
-### ☁️ Platform
-- **Databricks Lakehouse Platform**
-
-### 👨‍💻 Programming & Processing
-- **Python**
-- **PySpark**
-- **Apache Spark Structured Streaming**
-
-### 🗄️ Storage & Data Lake
-- **Delta Lake**
-- **Delta Tables**
-
-### 🔄 Data Engineering
-- **Lakeflow Declarative Pipelines**
-- **Streaming Tables**
-- **Auto CDC**
-- **Change Data Feed (CDC)**
-- **Schema Evolution (`mergeSchema`)**
-- **Lakeflow Expectations**
-- **Column Mapping**
-- **Auto Optimize**
-
-### 🏛️ Data Architecture
-- **Medallion Architecture (Bronze, Silver, Gold)**
-- **Dimensional Modeling**
-- **SCD Type 1 add SCD Type 2**
-- **Window Aggregation**
-- **Watermarking**
+# Tech Stack :
+Databricks Lakehouse Platform
+Python
+PySpark
+Apache Spark Structured Streaming
+Delta Lake
+Lakeflow Declarative Pipelines
+Streaming Tables
+Auto CDC
+Delta Change Data Feed (CDF)
+Schema Evolution
+Lakeflow Expectations
+Column Mapping
+Auto Optimize
+Medallion Architecture (Bronze, Silver, Gold)
+SCD Type 1 & Type 2
+Window Aggregations
+Watermarking
+Stream-Batch Joins
 
 ### Data Pipeline Architecture :
 <img width="1536" height="1024" alt="ChatGPT Image Aug 31, 2026, 01_18_52 PM" src="https://github.com/user-attachments/assets/507763f0-5a2b-4208-8158-8611ba7df6b4" />
