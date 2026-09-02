@@ -8,18 +8,9 @@ Traditional sales data processing happens through batch pipelines, where data is
 Because of this delay, it becomes difficult for business teams to identify the latest business performance, sales trends in real time. Another challenge is that different business requirements require managing separate pipelines, which increases development time, development cost, and maintenance effort.
 
 
-## Business Problem :
-The business needed faster access to sales information to make quick decisions related to revenue tracking, inventory management, and sales planning. Since the data was not available in real time, teams had to depend on delayed reports, which affected decision-making and operational efficiency.
-
 ## Solution :
 To solve this problem, I designed a data pipeline using the Databricks Lakehouse Platform and followed the Medallion Architecture, which consists of Bronze, Silver, and Gold layers. In the Bronze layer, I ingest the raw sales data and apply data quality validations using expectations. In the Silver layer, I clean and transform the data using SQL and Spark transformations. In the Gold layer, I perform business-level analysis using Spark SQL and prepare the data for reporting and analytics.
 
-
-## Business Value :
-The pipeline provides faster sales insights, improves inventory tracking, reduces manual work, and helps business teams make quicker decisions.
-
-## Target Users :
-Sales teams use the data to track sales and revenue, business teams use it for decision-making, and data analysts use it for reporting and analysis. Data engineers manage and maintain the pipeline.
 
 ## 🛠️ Tech Stack
 
@@ -36,7 +27,7 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 - **Delta Tables**
 
 ### 🔄 Data Engineering
-- **Lakeflow Declarative Pipelines (Delta Live Tables)**
+- **Lakeflow Declarative Pipelines**
 - **Streaming Tables**
 - **Auto CDC**
 - **Change Data Feed (CDC)**
@@ -48,7 +39,7 @@ Sales teams use the data to track sales and revenue, business teams use it for d
 ### 🏛️ Data Architecture
 - **Medallion Architecture (Bronze, Silver, Gold)**
 - **Dimensional Modeling**
-- **SCD Type 1**
+- **SCD Type 1 add SCD Type 2**
 - **Window Aggregation**
 - **Watermarking**
 
