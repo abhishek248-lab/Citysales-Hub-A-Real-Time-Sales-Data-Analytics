@@ -1,5 +1,3 @@
-# Databricks notebook source
-# DBTITLE 1,Generate sales data
 from pyspark.sql.functions import col,lit,when
 from pyspark.sql.types import StructType,StructField,IntegerType,StringType,DoubleType,TimestampType,DateType
 from constants import first_name, last_name, gender, city, street_name, locality,sales_channel,payment_method,products
