@@ -173,29 +173,10 @@ during CDC and SCD processing, while excluding them from the final Silver table,
 
 ## ⚡ Performance Optimization
 
-- Implemented **incremental streaming processing** to process only newly arriving records instead of reprocessing the complete dataset.
-- Applied **Lakeflow Expectations** in the Bronze layer to filter invalid records at ingestion, reducing downstream processing overhead.
-- Used **Temporary Views** for lightweight preprocessing without creating unnecessary intermediate storage.
-- Optimized enrichment using **Stream-Batch Joins**, reducing memory consumption compared to Stream-Stream joins.
-- Applied **Liquid Clustering** on `customer_id` and `product_id` to improve query performance.
-- Enabled **Auto Optimize** for automatic file compaction and optimized storage layout.
-- Leveraged **Change Data Feed (CDC)** for efficient downstream change tracking.
-- Configured **120-day Delta retention** to support governance, auditing, and Delta Time Travel.
-
----
-
-## ❌ Error Handling
-
-- Applied **Lakeflow Expectations** to validate incoming records and automatically filter invalid data before downstream processing.
-- Enforced business validation rules including:
-  - `NOT NULL`
-  - `amount > 0`
-  - `quantity > 0`
-- Used **Auto CDC** to process inserts and updates while maintaining consistent dimension tables.
-- Leveraged **Delta Lake ACID Transactions** to guarantee atomic writes and prevent partial data updates.
-- Supported automatic recovery by allowing failed streaming micro-batches to be safely retried.
-
----
-
-
-
+- Implemented incremental streaming processing to process only newly arriving records instead of reprocessing the complete dataset.
+- Applied Lakeflow Expectations in the Bronze layer to filter invalid records early, reducing unnecessary downstream processing.
+- Used Temporary Views for lightweight transformations without creating unnecessary intermediate tables.
+- Optimized enrichment using Stream-Batch Joins, reducing state and memory overhead compared with Stream-Stream joins.
+- Leveraged Delta Lake Change Data Feed (CDF) for efficient incremental change tracking and downstream processing.
+- Enabled Delta Lake column mapping and schema evolution to support flexible schema changes while minimizing pipeline disruptions.
+- Configured 120-day Delta retention to balance governance, auditing, and Delta Time Travel requirements.
