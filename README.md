@@ -46,13 +46,8 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 ### Data Pipeline Architecture :
 <img width="1536" height="1024" alt="ChatGPT Image Aug 31, 2026, 01_18_52 PM" src="https://github.com/user-attachments/assets/507763f0-5a2b-4208-8158-8611ba7df6b4" />
 
-
-The pipeline follows the Medallion Architecture approach with Bronze, Silver, and Gold layers. The Bronze layer stores raw incoming sales data, the Silver layer performs data cleaning, validation, and enrichment, and the Gold layer contains aggregated sales data used for revenue tracking, sales performance analysis, inventory monitoring, and reporting. The pipeline is implemented using the Databricks Lakehouse Platform, which supports both batch and real-time data processing.
-  
 ## Features & Implementation Details:
-
-<img width="1780" height="666" alt="Screenshot 2026-07-12 161230" src="https://github.com/user-attachments/assets/1a40d61c-4bac-4794-a71a-a11bf8adb798" />
-
+<img width="1412" height="702" alt="Screenshot 2026-09-02 164947" src="https://github.com/user-attachments/assets/56a7a253-5b20-41fc-a0a5-1944d752e613" />
 
 ## 📌 Synthetic Data Generator
 
