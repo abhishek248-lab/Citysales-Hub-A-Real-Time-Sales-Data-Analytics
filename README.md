@@ -54,87 +54,35 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 
 ---
 
-# 🥉 Bronze Layer (Raw Data Ingestion)
+# Pipeline Layer Summary
 
-### Purpose
-The Bronze layer ingests raw streaming data while ensuring data quality and schema consistency.
+## **Bronze Layer** (Raw Data Ingestion)
 
-### Features
+- The Bronze layer ingests raw CSV data from Unity Catalog Volumes using Auto Loader.
+- The `customers_bronze` table ingests customer data and applies data quality checks.
+- The `product_bronze` table ingests product catalog data and validates product information.
+- The `orders_bronze` table combines orders from Bhubaneswar and Khordha using append flows.
+- Data quality rules are applied to remove invalid records.
+- Change Data Feed (CDF) is enabled on Bronze tables for downstream CDC processing.
 
-- Ingests streaming **Customer**, **Product**, and **Sales** data into Bronze Streaming Tables:
-  - `customers`
-  - `products`
-  - `append_sales`
-- Combines multiple city-wise sales streams using **Append Flows** to create a unified streaming sales dataset.
-- Implements **Lakeflow Expectations** to enforce data quality rules:
-  - NOT NULL validation
-  - `amount > 0`
-  - `quantity > 0`
-- Supports **Schema Evolution** using **`mergeSchema`**, allowing upstream schema changes without manual intervention.
-- Enables **Change Data Feed (CDC)** for downstream change tracking.
-- Uses **Column Mapping** to support schema modifications such as column renames.
-- Configures **120-day Delta retention** for governance, auditing, and Delta Time Travel.
-- Stores validated raw data as the foundation for downstream transformations.
+## **Silver Layer** (Cleansed & Transformed)
 
----
+- The Silver layer cleans and standardizes data received from the Bronze layer.
+- Duplicate records are removed and unnecessary whitespace is trimmed.
+- Customer names are standardized, and multiple date formats are converted into a consistent format.
+- Lakeflow Auto CDC processes inserts, updates, and deletes from the transformed data.
+- The `customers_CDC_silver` table maintains customer data using **SCD Type 1**.
+- The `products_CDC_silver` table maintains product data using **SCD Type 2** to track price history.
+- The `orders_CDC_silver` table maintains order data using **SCD Type 1**.
 
-# 🥈 Silver Layer (Transformation & Enrichment)
+## **Gold Layer** (Business Metrics)
 
-## Transformation Layer
-
-### Purpose
-Transforms and standardizes raw data before dimensional modeling.
-
-### Features
-
-- Uses **Temporary Views** for lightweight preprocessing without persisting intermediate datasets.
-- Standardizes business attributes:
-  - Converts **Region** to uppercase.
-  - Converts **Category** to uppercase.
-- Filters records using business rules:
-  - `quantity >= 2`
-- Keeps transformations pipeline-private while minimizing storage overhead.
-
----
-
-## Dimension & Fact Layer
-
-### Features
-
-- Implements **Auto CDC** using **SCD Type 1** to maintain the latest version of **Customer** and **Product** dimensions.
-- Creates **Append-Only Fact Tables** to store immutable sales transactions.
-- Performs an efficient **Stream-Batch Join** between streaming fact tables and batch dimension tables to generate an enriched sales dataset.
-- Enriches transactional data with:
-  - Customer information
-  - Product information
-  - Regional information
-- Applies **Liquid Clustering** on:
-  - `customer_id`
-  - `product_id`
-- Enables **Auto Optimize** for automatic file compaction and storage optimization.
-- Supports **Schema Evolution** throughout the enrichment process, automatically propagating newly added columns.
-
----
-
-# 🥇 Gold Layer (Business Analytics)
-
-### Purpose
-Generates real-time business KPIs for reporting and analytics.
-
-### Features
-
-- Builds a real-time analytics layer using **1-minute Tumbling Windows**.
-- Configures a **1-minute Watermark** to handle late-arriving streaming events.
-- Generates **21+ real-time Business KPIs** across multiple analytical domains.
-- Computes:
-  - 💰 Revenue Metrics
-  - 👥 Customer Metrics
-  - 📦 Product Metrics
-  - 📈 Sales Volume Metrics
-  - 🌍 Regional Metrics
-  - ⏱️ Time-Based Metrics
-- Produces optimized analytical datasets for business reporting and decision-making.
-- Delivers low-latency metrics suitable for enterprise-scale real-time analytics.
+- The Gold layer provides aggregated data for business reporting and analytics.
+- The `gold_customer_behavior_stream` table provides real-time customer behavior metrics using 5-minute windows.
+- The `gold_product_performance_stream` table provides real-time product sales metrics using 5-minute windows.
+- The `gold_payment_analysis_mv` materialized view provides payment method and transaction analysis.
+- The `gold_price_demand_analysis` materialized view analyzes the relationship between product prices and demand.
+- The pipeline follows the **Medallion Architecture: Bronze → Silver → Gold**.
 
 
 ### Output:
