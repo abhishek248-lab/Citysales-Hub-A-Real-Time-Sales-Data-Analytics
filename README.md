@@ -179,16 +179,6 @@ during CDC and SCD processing, while excluding them from the final Silver table,
 
 ---
 
-## 🔒 Security & Governance
-
-- Applied **Unity Catalog** permissions to secure datasets and control access.
-- Enabled **Change Data Feed (CDC)** for data lineage and auditing.
-- Used **Column Mapping** to safely support schema modifications, including column renames.
-- Configured **120-day retention policies** to support compliance and Delta Time Travel.
-- Maintained data quality using **Lakeflow Expectations** throughout the ingestion pipeline.
-
----
-
 ## ❌ Error Handling
 
 - Applied **Lakeflow Expectations** to validate incoming records and automatically filter invalid data before downstream processing.
@@ -200,32 +190,7 @@ during CDC and SCD processing, while excluding them from the final Silver table,
 - Leveraged **Delta Lake ACID Transactions** to guarantee atomic writes and prevent partial data updates.
 - Supported automatic recovery by allowing failed streaming micro-batches to be safely retried.
 
-### 🛡️ How Delta Lake Helps
-
-- Ensures **ACID Transactions** for reliable streaming writes.
-- Prevents incomplete or corrupted table updates during failures.
-- Supports **Time Travel** for auditing and recovery.
-- Enables safe retries without impacting previously committed data.
-
 ---
 
-## 📈 Scalability
 
-- Built on the **Databricks Lakehouse Platform** using Delta Lake and Lakeflow Declarative Pipelines.
-- Implemented the **Medallion Architecture (Bronze → Silver → Gold)** for scalable and maintainable data processing.
-- Designed the pipeline using **Streaming Tables**, enabling continuous ingestion with minimal latency.
-- Used **Auto CDC** to efficiently process dimension updates without expensive merge operations.
-- Supported **Schema Evolution** using `mergeSchema`, allowing the pipeline to scale with changing source schemas.
-- Configured **Cluster Autoscaling** to dynamically allocate compute resources based on streaming workload.
-- Designed a **multi-source append architecture**, making it easy to onboard additional regional sales streams.
-
----
-
-## 📊 Monitoring
-
-- Monitored **Lakeflow Pipeline** executions using the Databricks Pipeline UI.
-- Tracked streaming job health, processing latency, and pipeline execution status.
-- Monitored **Lakeflow Expectations** to identify invalid records and data quality failures.
-- Used Delta table history and pipeline logs for troubleshooting and operational monitoring.
-- Validated streaming throughput and micro-batch execution using Databricks monitoring tools.
 
