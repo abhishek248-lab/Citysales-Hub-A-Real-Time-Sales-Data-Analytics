@@ -36,7 +36,7 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 ### Data Pipeline Architecture :
 <img width="1536" height="1024" alt="ChatGPT Image Aug 31, 2026, 01_18_52 PM" src="https://github.com/user-attachments/assets/507763f0-5a2b-4208-8158-8611ba7df6b4" />
 
-## Features & Implementation Details:
+## Implementation Details:
 <img width="1412" height="702" alt="Screenshot 2026-09-02 164947" src="https://github.com/user-attachments/assets/56a7a253-5b20-41fc-a0a5-1944d752e613" />
 
 ## Synthetic Data Generator
