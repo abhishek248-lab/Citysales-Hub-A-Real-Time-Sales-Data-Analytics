@@ -39,9 +39,9 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 ## Features & Implementation Details:
 <img width="1412" height="702" alt="Screenshot 2026-09-02 164947" src="https://github.com/user-attachments/assets/56a7a253-5b20-41fc-a0a5-1944d752e613" />
 
-## 📌 Synthetic Data Generator
+## Synthetic Data Generator
 
-📌 **Synthetic Data Generator**
+**Synthetic Data Generator**
 
 - Developed a **continuous synthetic streaming data generator** to simulate real-time business transactions for **Customers, Products, and Sales** across multiple regions (**Bhubaneswar** and **Khordha**).
 - Defined **explicit PySpark schemas** for Customers, Products, and Orders to ensure consistent structure across continuously generated source data.
@@ -91,7 +91,7 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 
 
 
-## 🚧 Challenges And Solved
+## Challenges And Solved
 
 ### 1st:
 - My CDC source contained technical metadata columns such as _commit_version, _commit_timestamp, and _change_type.
@@ -110,9 +110,8 @@ during CDC and SCD processing, while excluding them from the final Silver table,
 - To solve this, I replaced to_date() with to_timestamp() and used the correct format dd/MM/yyyy HH:mm:ss. This preserves both the date and the actual time in the Silver timestamp column. After a full refresh, the Silver table contains the correct event timestamps, allowing the Gold window function and watermark to work correctly. The window can then be finalized, and when the trigger runs, the aggregation result is produced.
 ---
 
-## ⚡ Performance Optimization
+##  Performance Optimization
 
-- Implemented incremental streaming processing to process only newly arriving records instead of reprocessing the complete dataset.
 - Applied Lakeflow Expectations in the Bronze layer to filter invalid records early, reducing unnecessary downstream processing.
 - Used Temporary Views for lightweight transformations without creating unnecessary intermediate tables.
 - Optimized enrichment using Stream-Batch Joins, reducing state and memory overhead compared with Stream-Stream joins.
