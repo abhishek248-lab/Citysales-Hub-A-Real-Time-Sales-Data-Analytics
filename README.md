@@ -41,8 +41,6 @@ To solve this problem, I designed a data pipeline using the Databricks Lakehouse
 
 ## Synthetic Data Generator
 
-**Synthetic Data Generator**
-
 - Developed a **continuous synthetic streaming data generator** to simulate real-time business transactions for **Customers, Products, and Sales** across multiple regions (**Bhubaneswar** and **Khordha**).
 - Defined **explicit PySpark schemas** for Customers, Products, and Orders to ensure consistent structure across continuously generated source data.
 - Generated **incremental batches of 5–20 records every 60 seconds** and wrote them as CSV files to **Unity Catalog Volumes**, simulating live streaming source feeds for Bronze-layer Auto Loader ingestion.
