@@ -154,7 +154,7 @@ Generates real-time business KPIs for reporting and analytics.
 
 ## 🚧 Challenges And Solved
 
-### Ist chnllange
+### Ist challange and Solve:
 - My CDC source contained technical metadata columns such as _commit_version, _commit_timestamp, and _change_type.
 These columns were added because they are required by AUTO CDC to identify the type of change and process CDC records in the correct sequence
 using sequence_by, which is important for implementing SCD Type 1 and SCD Type 2. However, I did not want these technical columns to remain in
