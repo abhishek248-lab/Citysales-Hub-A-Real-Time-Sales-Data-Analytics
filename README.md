@@ -5,7 +5,7 @@ My project name is City Sales Hub a real-time sales analytics service built for 
 
 Traditional sales data processing happens through batch pipelines, where data is collected from different sources and processed in batches before being stored in a data warehouse. This makes the overall data processing a long process, as data is available in the data warehouse only after the batch processing is completed.
 
-Because of this delay, it becomes difficult for business teams to identify the latest business performance, sales trends in real time. Another challenge is that different business requirements require managing separate pipelines, which increases development time, development cost, and maintenance effort.
+Because of this delay, it becomes difficult for business teams to identify the latest business performance, sales trends . Another challenge is that different business requirements require managing separate pipelines, which increases development time, development cost, and maintenance effort.
 
 
 ## Solution :
