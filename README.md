@@ -1,5 +1,5 @@
 ## Project Overview :
-My project name is City Sales Hub a real-time sales data analytics service built for **Madhav E-commerce** to analyze regional sales in real time across the Bhubaneswar and Khordha regions.It is built on the Databricks Lakehouse Platform using modern data engineering technologies such as Lakeflow Spark Declarative Pipelines, Spark Structured Streaming, Delta Lake and Pyspark and python. The pipeline ingests, validates, transforms, and processes sales data in real time, enabling real-time sales dashboards, regional performance tracking, and faster business reporting.
+My project name is City Sales Hub a real-time sales analytics service built for **Madhav E-commerce** to analyze regional sales in real time across the Bhubaneswar and Khordha regions.It is built on the Databricks Lakehouse Platform using modern data engineering technologies such as Lakeflow Spark Declarative Pipelines, Spark Structured Streaming, Delta Lake and Pyspark and python. The pipeline ingests, validates, transforms, and processes sales data in real time, enabling real-time sales dashboards, regional performance tracking, and faster business reporting.
 
 ## Problem Statement :
 
