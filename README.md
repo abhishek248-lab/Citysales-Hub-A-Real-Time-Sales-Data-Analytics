@@ -9,7 +9,7 @@ Because of this delay, it becomes difficult for business teams to identify the l
 
 
 ## Solution :
-To solve this problem, I designed a data pipeline using the Databricks Lakehouse Platform and followed the Medallion Architecture, which consists of Bronze, Silver, and Gold layers. In the Bronze layer, I ingest the raw sales data and apply data quality validations using expectations. In the Silver layer, I clean and transform the data using SQL and Spark transformations. In the Gold layer, I perform business-level analysis using Spark SQL and prepare the data for reporting and analytics.
+To solve this problem, I designed a data pipeline using the Databricks Lakehouse Platform and followed the Medallion Architecture, which consists of Bronze, Silver, and Gold layers. In the Bronze layer, I ingest the raw sales data and apply data quality validations using expectations. In the Silver layer, I clean and transform using Spark Structured Streaming.. In the Gold layer, I perform business-level analysis using Spark SQL and prepare the data for reporting and analytics.
 
 
 # Tech Stack
