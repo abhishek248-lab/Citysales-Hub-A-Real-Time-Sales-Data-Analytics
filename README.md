@@ -101,7 +101,7 @@ my final Silver table because they are not business-related data.
 during CDC and SCD processing, while excluding them from the final Silver table, resulting in a clean table containing only business-relevant columns.
 
 ### 2nd:
-- The Silver source contains change commits such as UPDATE and DELETE, while the Gold streaming query expects append-style data, so when Spark encounters these different types of changes, it gets confused about the events coming into the window; because of this, the watermark may not progress as expected, so Spark keeps the window open thinking that more relevant events may still arrive, and when the trigger runs during that window, we may see 0 rows because Spark has not yet finalized the aggregation; once the watermark passes the window end, Spark considers the window complete, aggregates all the events belonging to that window, and finalizes the result.
+- The Silver source contains change commits such as UPDATE and DELETE, while the Gold streaming query expects append-style data, so when Spark encounters these different types of changes, it gets confused about the events coming into the window.
 - I resolved this by using .option("skipChangeCommits", "true") in the Gold streaming query. It tells Spark to skip the UPDATE and DELETE change commits coming from the Silver source, so the Gold stream can focus on the append-style data. This allows the watermark to progress as expected, the window to close, and the aggregation result to be calculated and finalized, so when the trigger occurs, we get the correct aggregation result for that window.
 
 ### 3rd:
